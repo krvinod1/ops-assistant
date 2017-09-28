@@ -15,9 +15,13 @@ import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 import com.amazon.speech.ui.SsmlOutputSpeech;
+import com.google.gson.Gson;
+import org.apache.http.client.methods.HttpPost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -40,6 +44,8 @@ public class OpsAssistantSpeechlet implements Speechlet {
     private static final String SESSION_ENVIRONMENT = "environment";
     private static final String SESSION_VERSION = "version";
     private static final String SESSION_COUNT = "count";
+
+    private static final String HOST_URL = "https://stage.api.appconnect.intuit.com/api/v1/admin/stacks/";
 
 
     /**
@@ -356,6 +362,13 @@ public class OpsAssistantSpeechlet implements Speechlet {
                         .append(slotValueMap.get(SLOT_COUNT))
                         .toString();
 
+        try {
+            handleDeployStackRequest(slotValueMap);
+        } catch (Exception e) {
+            log.error("Error while deploying stack..");
+            speechOutput = "Error while deploying the stack, please try again.";
+        }
+
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
         card.setTitle("Ops Assistant");
@@ -364,7 +377,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
         // Create the plain text output
         PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
         outputSpeech.setText(speechOutput);
-
+        log.info("Executed the stack creation request..");
         return SpeechletResponse.newTellResponse(outputSpeech, card);
     }
 
@@ -514,6 +527,56 @@ public class OpsAssistantSpeechlet implements Speechlet {
 
         return newAskResponse(speechOutput, repromptText);
     }
+
+    public String handleDeployStackRequest(Map<String, String> stackValueMap) throws Exception{
+
+        DeployStackRequest deployStackRequest = new DeployStackRequest();
+        deployStackRequest.setStackType("api");//stackValueMap.get(//SLOT_MODULE.toLowerCase()));
+        deployStackRequest.setStackEnv("qa");//stackValueMap.get(//SLOT_ENVIRONMENT.toLowerCase()));
+        deployStackRequest.setStackVersion("3.0.89.0-SNAPSHOT");//stackValueMap.get(SLOT_VERSION+"-SNAPSHOT"));
+        deployStackRequest.setStackCapacity("Single");
+        deployStackRequest.setZone("us-west-2a");
+
+        if (SLOT_ENVIRONMENT.equalsIgnoreCase("qa")) {
+            deployStackRequest.setInstanceTag("develop");
+        } else {
+            deployStackRequest.setInstanceTag("release");
+        }
+        HttpPost httpPostReq = HttpRequestHelper.createHttpPostRequest(HOST_URL);
+
+        String authHeader = HttpRequestHelper.getPrivateAuthHeader(HttpRequestHelper.getAuthHeaderMap());
+        String stackRequestJson = convertToJson(deployStackRequest);
+        log.info("Stack deployment request = {}",stackRequestJson);
+
+        httpPostReq.setHeader("Authorization",authHeader);
+        try {
+            httpPostReq.setHeader("intuit_originatingip", InetAddress.getLocalHost().getHostAddress());
+            HttpHelperResponse response = HttpRequestHelper.doPostRequest(httpPostReq, stackRequestJson);
+            if(response!=null)
+            {
+                if (response.getHttpStatus() != 200) {
+                    return "Error while deploying the stack, please try again.";
+                }
+            }
+
+        } catch (UnknownHostException e) {
+            log.error("Error occurred. " + e.getMessage(), e);
+            throw new SpeechletException("Error while deploying the stack, please try again.");
+        } catch (Exception e) {
+            log.error("Error occurred. " + e.getMessage(), e);
+            throw new SpeechletException("Error while deploying the stack, please try again.");
+        }
+        log.info("Stack deployed successfully...");
+        return "Stack deployed successfully.";
+    }
+
+
+    public static String convertToJson(Object source){
+        Gson gson = new Gson();
+        return gson.toJson(source);
+    }
+
+
 
 
 }
