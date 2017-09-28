@@ -1,0 +1,61 @@
+{
+  "intents": [
+    {
+      "intent": "OneshotOpsIntent",
+      "slots": [
+        {
+          "name": "Environment",
+          "type": "LIST_OF_ENVIRONMENTS"
+        },
+        {
+          "name": "Module",
+          "type": "LIST_OF_MODULES"
+        },
+        {
+          "name": "Version",
+          "type": "LIST_OF_VERSIONS"
+        },
+        {
+          "name": "Count",
+          "type": "LIST_OF_SERVER_COUNT"
+        }
+      ]
+    },
+    {
+      "intent": "DialogOpsIntent",
+      "slots": [
+        {
+          "name": "Environment",
+          "type": "LIST_OF_ENVIRONMENTS"
+        },
+        {
+          "name": "Module",
+          "type": "LIST_OF_MODULES"
+        },
+        {
+          "name": "Version",
+          "type": "LIST_OF_VERSIONS"
+        },
+        {
+          "name": "Count",
+          "type": "LIST_OF_SERVER_COUNT"
+        }
+      ]
+    },
+    {
+      "intent": "SupportedEnvironmentsIntent"
+    },
+    {
+      "intent": "SupportedModulesIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

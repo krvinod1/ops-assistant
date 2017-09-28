@@ -15,7 +15,7 @@ public class OpsAssistantSpeechletRequestStreamHandler extends SpeechletRequestS
          * This Id can be found on https://developer.amazon.com/edw/home.html#/ "Edit" the relevant
          * Alexa Skill and put the relevant Application Ids in this Set.
          */
-        supportedApplicationIds.add("amzn1.ask.skill.ec3c1cb4-9409-46aa-bc68-837698caab7a");
+        supportedApplicationIds.add("amzn1.ask.skill.02ae683c-ecb8-4053-8e10-84cbf8db4844");
     }
 
     public OpsAssistantSpeechletRequestStreamHandler() {
