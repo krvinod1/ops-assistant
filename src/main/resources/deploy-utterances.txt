@@ -1,20 +1,20 @@
 # V1 version of the utterances
 -------------------------------
-DialogOpsIntent {Environment}
-DialogOpsIntent {Environment} {Module}
-DialogOpsIntent {Environment} {Module} {Version}
-DialogOpsIntent {Environment} {Module} {Version} {Count}
-DialogOpsIntent {Module}
-DialogOpsIntent {Module} {Version}
-DialogOpsIntent {Module} {Version} {Count}
+DialogOpsDeployIntent {Environment}
+DialogOpsDeployIntent {Environment} {Module}
+DialogOpsDeployIntent {Environment} {Module} {Version}
+DialogOpsDeployIntent {Environment} {Module} {Version} {Count}
+DialogOpsDeployIntent {Module}
+DialogOpsDeployIntent {Module} {Version}
+DialogOpsDeployIntent {Module} {Version} {Count}
 
-OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version} and count {Count}
-OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version}
-OneshotOpsIntent deploy {Module} module with version {Version}  and count {Count} on {Environment} environment
+OneshotOpsDeployIntent deploy {Module} module on {Environment} environment with version {Version} and count {Count}
+OneshotOpsDeployIntent deploy {Module} module on {Environment} environment with version {Version}
+OneshotOpsDeployIntent deploy {Module} module with version {Version}  and count {Count} on {Environment} environment
 
-OneshotOpsIntent deploy {Module} on {Environment} with version {Version} and count
-OneshotOpsIntent deploy {Count} {Module} on {Environment} environment with version {Version}
-OneshotOpsIntent deploy {Module} on {Environment} environment with version {Version}
+OneshotOpsDeployIntent deploy {Module} on {Environment} with version {Version} and count
+OneshotOpsDeployIntent deploy {Count} {Module} on {Environment} environment with version {Version}
+OneshotOpsDeployIntent deploy {Module} on {Environment} environment with version {Version}
 
 
 SupportedModulesIntent what modules
@@ -30,14 +30,38 @@ SupportedEnvironmentsIntent which environments
 SupportedEnvironmentsIntent which environments do you support
 
 
+# Metrics utterances
+-------------------------
+
+OneshotOpsMetricsIntent report {Metrics} on {Environment}
+OneshotOpsMetricsIntent report {Environment} {Metrics}
+OneshotOpsMetricsIntent {Environment} {Metrics}
+OneshotOpsMetricsIntent {Metrics} {Environment}
+
+DialogOpsMetricsIntent report server metrics
+DialogOpsMetricsIntent {Environment}
+DialogOpsMetricsIntent {Metrics}
+DialogOpsMetricsIntent {Environment} {Metrics}
+DialogOpsMetricsIntent {Metrics} {Environment}
+
+ReportedMetricsIntent what metrics
+ReportedMetricsIntent what metrics are currently reported
+ReportedMetricsIntent what metrics are reported
+ReportedMetricsIntent what metrics are supported
+ReportedMetricsIntent which metrics
+ReportedMetricsIntent what metrics do you report
+ReportedMetricsIntent what metrics do you support
+
 
 
 # V2 version of the utterances
 --------------------------------------
-DialogOpsIntent Deploy on {Environment}
-DialogOpsIntent Deploy {Module} {Environment}
-DialogOpsIntent Deploy {Module} on {Environment} with {Version}
-DialogOpsIntent Deploy {Module} on {Environment} with {Version} and {Count}
-DialogOpsIntent Lets Deploy {Module}
-DialogOpsIntent Deploy {Module} with {Version}
-DialogOpsIntent Deploy {Module} with {Version} and {Count}
+DialogOpsDeployIntent Deploy on {Environment}
+DialogOpsDeployIntent Deploy {Module} {Environment}
+DialogOpsDeployIntent Deploy {Module} on {Environment} with {Version}
+DialogOpsDeployIntent Deploy {Module} on {Environment} with {Version} and {Count}
+DialogOpsDeployIntent Lets Deploy {Module}
+DialogOpsDeployIntent Deploy {Module} with {Version}
+DialogOpsDeployIntent Deploy {Module} with {Version} and {Count}
+
+

@@ -1,7 +1,7 @@
 {
   "intents": [
     {
-      "intent": "OneshotOpsIntent",
+      "intent": "OneshotOpsDeployIntent",
       "slots": [
         {
           "name": "Environment",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "intent": "DialogOpsIntent",
+      "intent": "DialogOpsDeployIntent",
       "slots": [
         {
           "name": "Environment",
@@ -41,6 +41,51 @@
           "type": "LIST_OF_SERVER_COUNT"
         }
       ]
+    },
+    {
+      "intent": "OneshotOpsMetricsIntent",
+      "slots": [
+        {
+          "name": "Environment",
+          "type": "LIST_OF_ENVIRONMENTS"
+        },
+        {
+          "name": "Metrics",
+          "type": "LIST_OF_METRICS"
+        },
+        {
+          "name": "Module",
+          "type": "LIST_OF_MODULES"
+        },
+        {
+          "name": "ServerType",
+          "type": "LIST_OF_SERVER_TYPE"
+        }
+      ]
+    },
+    {
+      "intent": "DialogOpsMetricsIntent",
+      "slots": [
+        {
+          "name": "Environment",
+          "type": "LIST_OF_ENVIRONMENTS"
+        },
+        {
+          "name": "Metrics",
+          "type": "LIST_OF_METRICS"
+        },
+        {
+          "name": "Module",
+          "type": "LIST_OF_MODULES"
+        },
+        {
+          "name": "ServerType",
+          "type": "LIST_OF_SERVER_TYPE"
+        }
+      ]
+    },
+    {
+      "intent": "ReportedMetricsIntent"
     },
     {
       "intent": "SupportedEnvironmentsIntent"
