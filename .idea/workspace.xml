@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1d81f8a-50fa-4333-926e-71788f63efe5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_APP_VERSIONS" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_ENVIRONMENTS" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_MODULES" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_SERVER_COUNT" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/intent-schema.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/utterances.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechlet.java" afterPath="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechlet.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/utterances.txt" afterPath="$PROJECT_DIR$/src/main/resources/deploy-utterances.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechletRequestStreamHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechletRequestStreamHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ops-assistant.iws" />
@@ -35,19 +29,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HelloWorldSpeechletRequestStreamHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/HelloWorldSpeechletRequestStreamHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="1" selection-start-line="18" selection-start-column="59" selection-end-line="31" selection-end-column="1" />
-              <folding>
-                <element signature="e#1153#1154#0" expanded="false" />
-                <element signature="e#1226#1227#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="HelloWorldSpeechlet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/HelloWorldSpeechlet.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="512" column="39" selection-start-line="512" selection-start-column="39" selection-end-line="512" selection-end-column="39" />
+              <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7403#7419#0" expanded="true" />
@@ -84,11 +65,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utterances.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/utterances.txt">
+      <file leaf-file-name="deploy-utterances.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/deploy-utterances.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63399696">
-              <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+            <state vertical-scroll-proportion="-9.109091">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.06467066">
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -138,7 +129,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechletRequestStreamHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="54" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="54" />
+              <caret line="18" column="92" selection-start-line="18" selection-start-column="92" selection-end-line="18" selection-end-column="92" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#371#379#0" expanded="true" />
@@ -170,15 +161,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/HelloWorldSpeechlet.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/HelloWorldSpeechletRequestStreamHandler.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_ENVIRONMENT" />
         <option value="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_MODULES" />
         <option value="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_APP_VERSIONS" />
         <option value="$PROJECT_DIR$/src/main/resources/slots/LIST_OF_SERVER_COUNT" />
         <option value="$PROJECT_DIR$/src/main/resources/intent-schema.json" />
-        <option value="$PROJECT_DIR$/src/main/resources/utterances.txt" />
         <option value="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechlet.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/utterances.txt" />
         <option value="$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechletRequestStreamHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/deploy-utterances.txt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -621,12 +613,12 @@
       <option name="number" value="Default" />
       <updated>1506548526643</updated>
       <workItem from="1506548531398" duration="3709000" />
-      <workItem from="1506573946117" duration="9386000" />
+      <workItem from="1506573946117" duration="11864000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13095000" />
+    <option name="totallyTimeSpent" value="15573000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="976" extended-state="6" />
@@ -638,11 +630,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18853363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.018743109" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25714287" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25416666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -765,25 +757,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14893617">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/slots/LIST_OF_MODULES">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/slots/LIST_OF_ENVIRONMENTS">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -812,10 +789,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/slots/LIST_OF_ENVIRONMENTS">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechletRequestStreamHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="54" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="54" />
+          <caret line="18" column="92" selection-start-line="18" selection-start-column="92" selection-end-line="18" selection-end-column="92" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#371#379#0" expanded="true" />
@@ -826,7 +811,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/intuit/appconnect/ops/OpsAssistantSpeechlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="512" column="39" selection-start-line="512" selection-start-column="39" selection-end-line="512" selection-end-column="39" />
+          <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7403#7419#0" expanded="true" />
@@ -837,10 +822,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/utterances.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/deploy-utterances.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63399696">
-          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+        <state vertical-scroll-proportion="-9.109091">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06467066">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
           <folding />
         </state>
       </provider>

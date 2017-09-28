@@ -1,0 +1,43 @@
+# V1 version of the utterances
+-------------------------------
+DialogOpsIntent {Environment}
+DialogOpsIntent {Environment} {Module}
+DialogOpsIntent {Environment} {Module} {Version}
+DialogOpsIntent {Environment} {Module} {Version} {Count}
+DialogOpsIntent {Module}
+DialogOpsIntent {Module} {Version}
+DialogOpsIntent {Module} {Version} {Count}
+
+OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version} and count {Count}
+OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version}
+OneshotOpsIntent deploy {Module} module with version {Version}  and count {Count} on {Environment} environment
+
+OneshotOpsIntent deploy {Module} on {Environment} with version {Version} and count
+OneshotOpsIntent deploy {Count} {Module} on {Environment} environment with version {Version}
+OneshotOpsIntent deploy {Module} on {Environment} environment with version {Version}
+
+
+SupportedModulesIntent what modules
+SupportedModulesIntent what modules are supported
+SupportedModulesIntent which modules are supported
+SupportedModulesIntent which modules
+SupportedModulesIntent which modules can you deploy
+
+SupportedEnvironmentsIntent what environments
+SupportedEnvironmentsIntent what environments are supported
+SupportedEnvironmentsIntent which environments are supported
+SupportedEnvironmentsIntent which environments
+SupportedEnvironmentsIntent which environments do you support
+
+
+
+
+# V2 version of the utterances
+--------------------------------------
+DialogOpsIntent Deploy on {Environment}
+DialogOpsIntent Deploy {Module} {Environment}
+DialogOpsIntent Deploy {Module} on {Environment} with {Version}
+DialogOpsIntent Deploy {Module} on {Environment} with {Version} and {Count}
+DialogOpsIntent Lets Deploy {Module}
+DialogOpsIntent Deploy {Module} with {Version}
+DialogOpsIntent Deploy {Module} with {Version} and {Count}
