@@ -1,0 +1,56 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "Environment",
+          "type": "LIST_OF_ENVIRONMENTS"
+        },
+        {
+          "name": "Metrics",
+          "type": "LIST_OF_METRICS"
+        },
+        {
+          "name": "ServerType",
+          "type": "LIST_OF_SERVER_TYPE"
+        }
+      ],
+      "intent": "OneshotMetricsIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Environment",
+          "type": "LIST_OF_ENVIRONMENTS"
+        },
+        {
+          "name": "Metrics",
+          "type": "LIST_OF_METRICS"
+        },
+        {
+          "name": "ServerType",
+          "type": "LIST_OF_SERVER_TYPE"
+        }
+      ],
+      "intent": "DialogMetricsIntent"
+    },
+    {
+      "intent": "SupportedMetricsIntent"
+    },
+    {
+      "intent": "SupportedEnvironmentsIntent"
+    },
+    {
+      "intent": "SupportedServerTypeIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}
