@@ -637,7 +637,7 @@ public class OpsAssistantMetricsSpeechlet implements Speechlet {
 
         if (session.getAttributes().containsKey(SESSION_MODULE)) {
             moduleSlotValue = (String) session.getAttribute(SESSION_MODULE);
-        } else if(!serverTypeValue.equalsIgnoreCase("DBServer")){
+        } else {
             // set city in session and prompt for date
             session.setAttribute(SESSION_SERVER_TYPE, serverTypeValue);
             session.setAttribute(SESSION_ENVIRONMENT, envSlotValue);
@@ -701,7 +701,7 @@ public class OpsAssistantMetricsSpeechlet implements Speechlet {
 
         if (session.getAttributes().containsKey(SESSION_MODULE)) {
             moduleSlotValue = (String) session.getAttribute(SESSION_MODULE);
-        } else if(!serverTypeValue.equalsIgnoreCase("DBServer")){
+        } else {
             // set city in session and prompt for date
             session.setAttribute(SESSION_SERVER_TYPE, serverTypeValue);
             session.setAttribute(SESSION_ENVIRONMENT, envSlotValue);
@@ -767,7 +767,7 @@ public class OpsAssistantMetricsSpeechlet implements Speechlet {
 
             if (session.getAttributes().containsKey(SESSION_MODULE)) {
                 moduleSlotValue = (String) session.getAttribute(SESSION_MODULE);
-            } else if(!serverTypeValue.equalsIgnoreCase("DBServer")){
+            } else {
                 // set city in session and prompt for date
                 session.setAttribute(SESSION_SERVER_TYPE, serverTypeValue);
                 session.setAttribute(SESSION_ENVIRONMENT, envSlotValue);
@@ -822,7 +822,7 @@ public class OpsAssistantMetricsSpeechlet implements Speechlet {
 
         if (session.getAttributes().containsKey(SESSION_MODULE)) {
             moduleSlotValue = (String) session.getAttribute(SESSION_MODULE);
-        } else if(!serverTypeValue.equalsIgnoreCase("DBServer")){
+        } else {
             // set city in session and prompt for date
             session.setAttribute(SESSION_METRICS, metricsSlotValue);
             String speechOutput = "For which module?";
