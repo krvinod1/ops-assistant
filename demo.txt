@@ -1,0 +1,45 @@
+First team member
+Start with some questions
+
+How many of you do Operation job? Means deploying and maintaining  your code in pre prod and prod env
+Do yo think, it is stressful and time consuming?
+
+There are other problems of today operation jobs
+
+1) It require lot of training of new technologies and expertised. If you are a new to team, you don't want to do production deployment for
+atleast first 3 months..
+2) There is always a chances of error due to human interaction.
+3) Maintaining multiple scripts..
+4) It is passive and DevOps engineer have to go and do or look for information.
+
+We vision a world, where a new team member can do production deployment from second day without any error and any stress.
+It is like having a chat about your favourite sport with your close buddy over coffee .
+
+Second team member:
+How this world looks like.. Let me give a glimpse of it.. We have build a Alexa based application, which can deploy and
+report server load metrics without typing a single line of code and sweating over it..
+
+ Demo
+
+
+
+Third member:
+Thanks you..Wow!! That's was great.. Do you guys like it?
+I am sure most of you liked it and would like to adopt it from tomorrow to make your life easy and have more
+time to write code than worrying about deployment..and maintaining system
+
+There are endless possibilities with it
+
+ Think a world where conventional UI ( Alexa or Bot) will alert you  current server/memory load and advice to to reduce or increase the server
+ capacity Inform you about current problem and suggest corrective action.. Send you a message on Slack, WhatsApp about
+ current server health and what is the next logical step to perform
+
+
+
+
+
+
+
+
+
+
