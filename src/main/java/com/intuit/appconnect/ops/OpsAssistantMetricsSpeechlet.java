@@ -340,7 +340,6 @@ public class OpsAssistantMetricsSpeechlet implements Speechlet {
             return handleMetricsDialogRequest(intent, session);
         }
         return handleMetricsDialogRequest(intent, session);
-
     }
 
     private SpeechletResponse handleModuleMetricsDialogRequest(final Intent intent, final Session session) {
