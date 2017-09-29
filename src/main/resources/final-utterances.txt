@@ -1,0 +1,24 @@
+# Deploy
+
+DialogOpsIntent {Environment}
+DialogOpsIntent {Environment} {Module}
+DialogOpsIntent {Environment} {Module} {Version}
+DialogOpsIntent {Environment} {Module} {Version} {Count}
+DialogOpsIntent {Module}
+DialogOpsIntent {Version}
+DialogOpsIntent {Module} {Version}
+DialogOpsIntent {Module} {Version} {Count}
+
+OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version} and count {Count}
+OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version}
+OneshotOpsIntent deploy {Module} module with version {Version}  and count {Count} on {Environment} environment
+OneshotOpsIntent deploy {Module} on {Environment} with version {Version} and count
+OneshotOpsIntent deploy {Count} {Module} on {Environment} environment with version {Version}
+OneshotOpsIntent deploy {Module} on {Environment} environment with version {Version}
+
+
+SupportedModulesIntent what modules
+SupportedModulesIntent what modules are supported
+SupportedModulesIntent which modules are supported
+SupportedModulesIntent which modules
+SupportedModulesIntent which modules can you deploy

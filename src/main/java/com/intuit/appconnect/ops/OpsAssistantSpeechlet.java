@@ -40,10 +40,16 @@ public class OpsAssistantSpeechlet implements Speechlet {
     private static final String SLOT_VERSION = "Version";
     private static final String SLOT_COUNT = "Count";
 
+    private static final String SLOT_METRICS = "Metrics";
+    private static final String SLOT_SERVER_TYPE = "ServerType";
+
+
     private static final String SESSION_MODULE = "module";
     private static final String SESSION_ENVIRONMENT = "environment";
     private static final String SESSION_VERSION = "version";
     private static final String SESSION_COUNT = "count";
+    private static final String SESSION_METRICS = "metrics";
+    private static final String SESSION_SERVER_TYPE = "servertype";
 
     private static final String HOST_URL = "https://stage.api.appconnect.intuit.com/api/v1/admin/stacks/";
 
@@ -92,7 +98,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
          */
         Intent intent = request.getIntent();
         String intentName = intent.getName();
-
+        log.info("Intent name: {}", intentName);
         if ("OneshotOpsIntent".equals(intentName)) {
             return handleOneshotOpsRequest(intent, session);
         } else if ("DialogOpsIntent".equals(intentName)) {
@@ -119,6 +125,8 @@ public class OpsAssistantSpeechlet implements Speechlet {
             return handleSupportedEnvironmentRequest(intent, session);
         } else if ("SupportedModulesIntent".equals(intentName)) {
               return handleSupportedModulesRequest(intent, session);
+        } else if ("SupportedMetricsIntent".equals(intentName)) {
+            return handleSupportedMetricsRequest(intent, session);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return handleHelpRequest();
         } else if ("AMAZON.StopIntent".equals(intentName)) {
@@ -139,8 +147,171 @@ public class OpsAssistantSpeechlet implements Speechlet {
         return null;
     }
 
-    private SpeechletResponse handleModuleDialogRequest(final Intent intent, final Session session) {
+    private SpeechletResponse handleMetricsDialogRequest(final Intent intent, final Session session) {
 
+        String envSlotValue = null;
+        String serverTypeValue = null;
+        String metricsSlotValue = null;
+
+        try {
+            metricsSlotValue = getSlotValueFromIntent(intent, false, SLOT_METRICS);
+        } catch (Exception e) {
+            // invalid city. move to the dialog
+            String speechOutput =
+                    "Please try again, the metrics that can be currently reported are CPU usage and memory usage."
+                            + "What metrics are you interested in?";
+
+            // repromptText is the same as the speechOutput
+            return newAskResponse(speechOutput, speechOutput);
+        }
+
+        if (session.getAttributes().containsKey(SESSION_SERVER_TYPE)) {
+            serverTypeValue = (String) session.getAttribute(SESSION_SERVER_TYPE);
+        } else {
+            // set city in session and prompt for date
+            session.setAttribute(SESSION_METRICS, metricsSlotValue);
+            String speechOutput = "For what server type ?";
+            String repromptText = "What server type: App Server or DB server?";
+
+            return newAskResponse(speechOutput, repromptText);
+        }
+
+        if (session.getAttributes().containsKey(SESSION_ENVIRONMENT)) {
+            envSlotValue = (String) session.getAttribute(SESSION_ENVIRONMENT);
+        } else {
+            // set city in session and prompt for date
+            session.setAttribute(SESSION_METRICS, metricsSlotValue);
+            session.setAttribute(SESSION_SERVER_TYPE, envSlotValue);
+
+            String speechOutput = "What environment?";
+            String repromptText =
+                    metricsSlotValue + " for " +serverTypeValue +" on what environment?";
+
+            return newAskResponse(speechOutput, repromptText);
+        }
+
+        Map<String, String> slotValueMap = new HashMap<String, String>();
+        slotValueMap.put(SLOT_ENVIRONMENT, envSlotValue);
+        slotValueMap.put(SLOT_SERVER_TYPE, serverTypeValue);
+        slotValueMap.put(SLOT_METRICS, metricsSlotValue);
+
+        return getMetricsReponse(slotValueMap);
+    }
+
+
+    private SpeechletResponse handleEnvMetricsDialogRequest(final Intent intent, final Session session) {
+
+        String envSlotValue = null;
+        String serverTypeValue = null;
+        String metricsSlotValue = null;
+
+        try {
+            envSlotValue = getSlotValueFromIntent(intent, false, SLOT_ENVIRONMENT);
+        } catch (Exception e) {
+            // invalid city. move to the dialog
+            String speechOutput =
+                    "Please try again, the metrics that can be currently reported for QA, STAGE and BETA environment."
+                            + "What environment do you want the metrics for?";
+
+            // repromptText is the same as the speechOutput
+            return newAskResponse(speechOutput, speechOutput);
+        }
+
+        if (session.getAttributes().containsKey(SESSION_SERVER_TYPE)) {
+            serverTypeValue = (String) session.getAttribute(SESSION_SERVER_TYPE);
+        } else {
+            // set city in session and prompt for date
+            session.setAttribute(SESSION_ENVIRONMENT, envSlotValue);
+            String speechOutput = "For what server type ?";
+            String repromptText = "What server type: App Server or DB server?";
+
+            return newAskResponse(speechOutput, repromptText);
+        }
+
+        if (session.getAttributes().containsKey(SESSION_METRICS)) {
+            metricsSlotValue = (String) session.getAttribute(SESSION_METRICS);
+        } else {
+            // set city in session and prompt for date
+            session.setAttribute(SESSION_ENVIRONMENT, envSlotValue);
+            session.setAttribute(SESSION_SERVER_TYPE, serverTypeValue);
+
+            String speechOutput = "The metrics that can be currently reported are CPU usage and memory usage."
+                    + "What metrics are you interested in?";
+            String repromptText =
+                    metricsSlotValue + " for " +serverTypeValue +" on what environment?";
+
+            return newAskResponse(speechOutput, repromptText);
+        }
+
+        Map<String, String> slotValueMap = new HashMap<String, String>();
+        slotValueMap.put(SLOT_ENVIRONMENT, envSlotValue);
+        slotValueMap.put(SLOT_SERVER_TYPE, serverTypeValue);
+        slotValueMap.put(SLOT_METRICS, metricsSlotValue);
+
+        return getMetricsReponse(slotValueMap);
+    }
+
+
+    private SpeechletResponse handleServerTypeMetricsDialogRequest(final Intent intent, final Session session) {
+
+        String envSlotValue = null;
+        String serverTypeValue = null;
+        String metricsSlotValue = null;
+
+        try {
+            serverTypeValue = getSlotValueFromIntent(intent, false, SLOT_SERVER_TYPE);
+        } catch (Exception e) {
+            // invalid city. move to the dialog
+            String speechOutput =
+                    "Please try again, currently supported server types are UI, API, JOBS, CONNECTOR, DATABASE."
+                            + "What server type do you want the metrics for?";
+
+            // repromptText is the same as the speechOutput
+            return newAskResponse(speechOutput, speechOutput);
+        }
+
+        if (session.getAttributes().containsKey(SESSION_ENVIRONMENT)) {
+            envSlotValue = (String) session.getAttribute(SESSION_ENVIRONMENT);
+        } else {
+            // set city in session and prompt for date
+            session.setAttribute(SESSION_SERVER_TYPE, serverTypeValue);
+            String speechOutput = "For what environment ?";
+            String repromptText = "You would like to check the metrics for which environment?";
+
+            return newAskResponse(speechOutput, repromptText);
+        }
+
+        if (session.getAttributes().containsKey(SESSION_METRICS)) {
+            metricsSlotValue = (String) session.getAttribute(SESSION_METRICS);
+        } else {
+            // set city in session and prompt for date
+            session.setAttribute(SESSION_ENVIRONMENT, envSlotValue);
+            session.setAttribute(SESSION_SERVER_TYPE, serverTypeValue);
+
+            String speechOutput = "The metrics that can be currently reported are CPU usage and memory usage."
+                    + "What metrics are you interested in?";
+            String repromptText =
+                    metricsSlotValue + " for " +serverTypeValue +" on what environment?";
+
+            return newAskResponse(speechOutput, repromptText);
+        }
+
+        Map<String, String> slotValueMap = new HashMap<String, String>();
+        slotValueMap.put(SLOT_ENVIRONMENT, envSlotValue);
+        slotValueMap.put(SLOT_SERVER_TYPE, serverTypeValue);
+        slotValueMap.put(SLOT_METRICS, metricsSlotValue);
+
+        return getMetricsReponse(slotValueMap);
+    }
+
+
+
+
+
+
+
+
+    private SpeechletResponse handleModuleDialogRequest(final Intent intent, final Session session) {
         String moduleSlotValue = null;
         String targetEnv = null;
         String version = null;
@@ -178,7 +349,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
         } else {
             // set city in session and prompt for date
             session.setAttribute(SESSION_MODULE, moduleSlotValue);
-            session.setAttribute(SESSION_VERSION, targetEnv);
+            session.setAttribute(SESSION_ENVIRONMENT, targetEnv);
             String speechOutput = "Which artifact version?";
             String repromptText =
                     "Which artifact version would you like to deploy "+moduleSlotValue +" module on "+targetEnv+" environment?";
@@ -186,11 +357,9 @@ public class OpsAssistantSpeechlet implements Speechlet {
             return newAskResponse(speechOutput, repromptText);
         }
 
-        Map<String, String> slotValueMap = new HashMap<String, String>();
-        slotValueMap.put(SLOT_MODULE, moduleSlotValue);
-        slotValueMap.put(SLOT_ENVIRONMENT, targetEnv);
-        slotValueMap.put(SLOT_VERSION, version);
-        slotValueMap.put(SLOT_COUNT, "1");
+        session.setAttribute(SESSION_MODULE,moduleSlotValue);
+
+        Map<String, String> slotValueMap = getSlotValueFromSession(session);
 
         return getDeploymentReponse(slotValueMap);
     }
@@ -241,11 +410,8 @@ public class OpsAssistantSpeechlet implements Speechlet {
             return newAskResponse(speechOutput, repromptText);
         }
 
-        Map<String, String> slotValueMap = new HashMap<String, String>();
-        slotValueMap.put(SLOT_MODULE, moduleSlotValue);
-        slotValueMap.put(SLOT_ENVIRONMENT, envSlotValue);
-        slotValueMap.put(SLOT_VERSION, versionSlotValue);
-        slotValueMap.put(SLOT_COUNT, "1");
+        session.setAttribute(SESSION_ENVIRONMENT,envSlotValue);
+        Map<String, String> slotValueMap = getSlotValueFromSession(session);
 
         return getDeploymentReponse(slotValueMap);
 
@@ -262,7 +428,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
         } catch (Exception e) {
             // invalid city. move to the dialog
             String speechOutput =
-                    "Please try again, the valid environments are 3.0.89.0, 3.0.90.0"
+                    "Please try again, the valid versions are 3.0.89.0, 3.0.90.0"
                             + "Which version would you like to deploy?";
 
             // repromptText is the same as the speechOutput
@@ -295,14 +461,25 @@ public class OpsAssistantSpeechlet implements Speechlet {
             return newAskResponse(speechOutput, repromptText);
         }
 
-        Map<String, String> slotValueMap = new HashMap<String, String>();
-        slotValueMap.put(SLOT_MODULE, moduleSlotValue);
-        slotValueMap.put(SLOT_ENVIRONMENT, envSlotValue);
-        slotValueMap.put(SLOT_VERSION, versionSlotValue);
-        slotValueMap.put(SLOT_COUNT, "1");
+        session.setAttribute(SESSION_VERSION,versionSlotValue);
+        Map<String, String> slotValueMap = getSlotValueFromSession(session);
+
 
         return getDeploymentReponse(slotValueMap);
 
+    }
+
+    private Map<String, String> getSlotValueFromSession (Session session) {
+        Map<String,String> slotValueMap = new HashMap<String, String>();
+        String slotValue = session.getAttribute(SESSION_MODULE).toString();
+        String envValue = session.getAttribute(SESSION_ENVIRONMENT).toString();
+        String versionValue = session.getAttribute(SESSION_VERSION).toString();
+        log.info("SlotValue = {}, envValue = {}, versionValue = {}",slotValue,envValue,versionValue);
+        slotValueMap.put(SLOT_MODULE,slotValue);
+        slotValueMap.put(SLOT_ENVIRONMENT,envValue);
+        slotValueMap.put(SLOT_VERSION,versionValue);
+        slotValueMap.put(SLOT_COUNT, "1");
+        return slotValueMap;
     }
 
     private SpeechletResponse handleCountDialogRequest(final Intent intent, final Session session) {
@@ -348,6 +525,66 @@ public class OpsAssistantSpeechlet implements Speechlet {
         return getDeploymentReponse(slotValueMap);
     }
 
+
+    private SpeechletResponse handleOneshotMetricsRequest(final Intent intent, final Session session) {
+        // Determine city, using default if none provided
+        String serverTypeSlotValue = null;
+        String envSlotValue = null;
+        String metricsSlotValue = null;
+        try {
+            serverTypeSlotValue = getSlotValueFromIntent(intent, false, SLOT_SERVER_TYPE);
+            envSlotValue = getSlotValueFromIntent(intent,false,SLOT_ENVIRONMENT);
+            metricsSlotValue = getSlotValueFromIntent(intent,false, SLOT_METRICS);
+
+        } catch (Exception e) {
+            // invalid city. move to the dialog
+            String speechOutput =
+                    "Please try again, the valid metrics are CPU usage and MEMORY usage for API, UI, JOBS, CONNECTORS and valid environments are QA, STAGE."
+                            + "Which metrics would you like to check?";
+
+            // repromptText is the same as the speechOutput
+            return newAskResponse(speechOutput, speechOutput);
+        }
+
+        // all slots filled, either from the user or by default values. Move to final request
+
+        Map<String, String> slotValueMap = new HashMap<String, String>();
+        slotValueMap.put(SLOT_METRICS, metricsSlotValue);
+        slotValueMap.put(SLOT_ENVIRONMENT, envSlotValue);
+        slotValueMap.put(SLOT_SERVER_TYPE, serverTypeSlotValue);
+
+
+        return getMetricsReponse(slotValueMap);
+    }
+
+
+    private SpeechletResponse getMetricsReponse (Map<String,String> slotValueMap) {
+        String speechOutput = "";
+        Set<Map.Entry<String,String>> slotValueEntrySet = slotValueMap.entrySet();
+        Iterator<Map.Entry<String,String>> iterator = slotValueEntrySet.iterator();
+        speechOutput = new StringBuilder("Metrics ")
+                .append(slotValueMap.get(SLOT_METRICS))
+                .append(" for ")
+                .append(slotValueMap.get(SLOT_SERVER_TYPE))
+                .append(" on ")
+                .append(slotValueMap.get(SLOT_ENVIRONMENT))
+                .append(" will be available soon. ")
+                .toString();
+
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle("Ops Assistant");
+        card.setContent(speechOutput);
+
+        // Create the plain text output
+        PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
+        outputSpeech.setText(speechOutput);
+
+        return SpeechletResponse.newTellResponse(outputSpeech, card);
+    }
+
+
+
     private SpeechletResponse getDeploymentReponse (Map<String,String> slotValueMap) {
         String speechOutput = "";
         Set<Map.Entry<String,String>> slotValueEntrySet = slotValueMap.entrySet();
@@ -363,7 +600,8 @@ public class OpsAssistantSpeechlet implements Speechlet {
                         .toString();
 
         try {
-            handleDeployStackRequest(slotValueMap);
+            log.info("Deploying...");
+           // handleDeployStackRequest(slotValueMap);
         } catch (Exception e) {
             log.error("Error while deploying stack..");
             speechOutput = "Error while deploying the stack, please try again.";
@@ -523,6 +761,18 @@ public class OpsAssistantSpeechlet implements Speechlet {
         String repromptText = "Which module would you like to deploy to?";
         String speechOutput =
                 "Currently, I support UI, API, JOBS, CONNECTOR modules for deployment: "
+                        + repromptText;
+
+        return newAskResponse(speechOutput, repromptText);
+    }
+
+
+    private SpeechletResponse handleSupportedMetricsRequest(final Intent intent,
+                                                            final Session session) {
+        // get city re-prompt
+        String repromptText = "Which metrics would you like to check?";
+        String speechOutput =
+                "Currently, I support CPU usage and MEMORY usage: "
                         + repromptText;
 
         return newAskResponse(speechOutput, repromptText);
