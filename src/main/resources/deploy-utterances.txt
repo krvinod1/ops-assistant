@@ -33,16 +33,15 @@ SupportedEnvironmentsIntent which environments do you support
 # Metrics utterances
 -------------------------
 
-OneshotOpsMetricsIntent report {Metrics} on {Environment}
-OneshotOpsMetricsIntent report {Environment} {Metrics}
-OneshotOpsMetricsIntent {Environment} {Metrics}
-OneshotOpsMetricsIntent {Metrics} {Environment}
+OneshotOpsMetricsIntent report {Metrics} on {Environment} for {ServerType}
+OneshotOpsMetricsIntent report {Metrics} on {Environment} for {ServerType} for module {Module}
 
 DialogOpsMetricsIntent report server metrics
 DialogOpsMetricsIntent {Environment}
 DialogOpsMetricsIntent {Metrics}
-DialogOpsMetricsIntent {Environment} {Metrics}
-DialogOpsMetricsIntent {Metrics} {Environment}
+DialogOpsMetricsIntent {Module}
+DialogOpsMetricsIntent {ServerType}
+
 
 ReportedMetricsIntent what metrics
 ReportedMetricsIntent what metrics are currently reported

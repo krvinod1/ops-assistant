@@ -22,4 +22,5 @@ public class OpsAssistantMetricsSpeechletRequestStreamHandler extends SpeechletR
     public OpsAssistantMetricsSpeechletRequestStreamHandler() {
         super(new OpsAssistantMetricsSpeechlet(), supportedApplicationIds);
     }
+
 }
