@@ -1,5 +1,9 @@
-# Deploy
-
+OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version} and count {Count}
+OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version}
+OneshotOpsIntent deploy {Module} module with version {Version}  and count {Count} on {Environment} environment
+OneshotOpsIntent deploy {Module} on {Environment} with version {Version} and count
+OneshotOpsIntent deploy {Count} {Module} on {Environment} environment with version {Version}
+OneshotOpsIntent deploy {Module} on {Environment} environment with version {Version}
 DialogOpsIntent {Environment}
 DialogOpsIntent {Environment} {Module}
 DialogOpsIntent {Environment} {Module} {Version}
@@ -8,15 +12,11 @@ DialogOpsIntent {Module}
 DialogOpsIntent {Version}
 DialogOpsIntent {Module} {Version}
 DialogOpsIntent {Module} {Version} {Count}
-
-OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version} and count {Count}
-OneshotOpsIntent deploy {Module} module on {Environment} environment with version {Version}
-OneshotOpsIntent deploy {Module} module with version {Version}  and count {Count} on {Environment} environment
-OneshotOpsIntent deploy {Module} on {Environment} with version {Version} and count
-OneshotOpsIntent deploy {Count} {Module} on {Environment} environment with version {Version}
-OneshotOpsIntent deploy {Module} on {Environment} environment with version {Version}
-
-
+SupportedEnvironmentsIntent what environments
+SupportedEnvironmentsIntent what environments are supported
+SupportedEnvironmentsIntent which environments are supported
+SupportedEnvironmentsIntent which environments
+SupportedEnvironmentsIntent which environments do you support
 SupportedModulesIntent what modules
 SupportedModulesIntent what modules are supported
 SupportedModulesIntent which modules are supported

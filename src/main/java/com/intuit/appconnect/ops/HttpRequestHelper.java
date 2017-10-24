@@ -183,7 +183,7 @@ public class HttpRequestHelper {
 
         Map<String,String> headerMap = new HashMap();
         headerMap.put(INTUIT_AUTH_ID,"123145816016672");
-        headerMap.put(INTUIT_TOKEN, "V1-246-b375kaxhs2u87rzqjlgrlh");
+        headerMap.put(INTUIT_TOKEN, "V1-96-a3i2i917h4yfyu0pxgec2a");
         return headerMap;
     }
 

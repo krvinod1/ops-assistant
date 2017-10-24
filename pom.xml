@@ -102,11 +102,11 @@
       <version>1.7.0</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.3.3</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.apache.httpcomponents</groupId>-->
+      <!--<artifactId>httpclient</artifactId>-->
+      <!--<version>4.3.3</version>-->
+    <!--</dependency>-->
 
     <!--Gson dependency-->
     <dependency>
@@ -127,6 +127,12 @@
       <artifactId>org.apache.commons.io</artifactId>
       <version>2.4</version>
       <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-cloudwatch</artifactId>
+      <version>1.11.203</version>
     </dependency>
 
   </dependencies>

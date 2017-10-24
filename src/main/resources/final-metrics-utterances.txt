@@ -1,8 +1,6 @@
 OneshotMetricsIntent report {Metrics} for {ServerType} server on {Environment} environment
 OneshotMetricsIntent report {Environment} {Metrics} for {ServerType}
 OneshotMetricsIntent get {Metrics} on {Environment} for {ServerType} server
-
-
 DialogMetricsIntent {Metrics}
 DialogMetricsIntent {ServerType}
 DialogMetricsIntent {Environment}
@@ -21,10 +19,8 @@ SupportedEnvironmentsIntent what environments are supported
 SupportedEnvironmentsIntent which environments are supported
 SupportedEnvironmentsIntent which environments
 SupportedEnvironmentsIntent which environments do you support
-
 SupportedServerTypeIntent what environments
 SupportedServerTypeIntent what environments are supported
 SupportedServerTypeIntent which environments are supported
 SupportedServerTypeIntent which environments
 SupportedServerTypeIntent which environments do you support
- 

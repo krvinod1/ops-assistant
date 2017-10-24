@@ -361,7 +361,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
 
         Map<String, String> slotValueMap = getSlotValueFromSession(session);
 
-        return getDeploymentReponse(slotValueMap);
+        return getDeploymentReponse(slotValueMap, session);
     }
 
 
@@ -413,7 +413,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
         session.setAttribute(SESSION_ENVIRONMENT,envSlotValue);
         Map<String, String> slotValueMap = getSlotValueFromSession(session);
 
-        return getDeploymentReponse(slotValueMap);
+        return getDeploymentReponse(slotValueMap, session);
 
     }
 
@@ -465,7 +465,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
         Map<String, String> slotValueMap = getSlotValueFromSession(session);
 
 
-        return getDeploymentReponse(slotValueMap);
+        return getDeploymentReponse(slotValueMap, session);
 
     }
 
@@ -522,7 +522,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
         slotValueMap.put(SLOT_VERSION, versionSlotValue);
         slotValueMap.put(SLOT_COUNT, countSlotValue);
 
-        return getDeploymentReponse(slotValueMap);
+        return getDeploymentReponse(slotValueMap, session);
     }
 
 
@@ -585,10 +585,14 @@ public class OpsAssistantSpeechlet implements Speechlet {
 
 
 
-    private SpeechletResponse getDeploymentReponse (Map<String,String> slotValueMap) {
+    private SpeechletResponse getDeploymentReponse (Map<String,String> slotValueMap, Session session) {
         String speechOutput = "";
         Set<Map.Entry<String,String>> slotValueEntrySet = slotValueMap.entrySet();
         Iterator<Map.Entry<String,String>> iterator = slotValueEntrySet.iterator();
+
+
+
+
         speechOutput = new StringBuilder("Deploying")
                         .append(slotValueMap.get(SLOT_MODULE))
                         .append(" module on ")
@@ -601,7 +605,7 @@ public class OpsAssistantSpeechlet implements Speechlet {
 
         try {
             log.info("Deploying...");
-           // handleDeployStackRequest(slotValueMap);
+            handleDeployStackRequest(slotValueMap, session);
         } catch (Exception e) {
             log.error("Error while deploying stack..");
             speechOutput = "Error while deploying the stack, please try again.";
@@ -657,15 +661,14 @@ public class OpsAssistantSpeechlet implements Speechlet {
      * @return SpeechletResponse spoken and visual response for the given intent
      */
     private SpeechletResponse getWelcomeResponse() {
-        String whatActionPrompt = "Do you want to deploy new stack or check status?";
+        String whatActionPrompt = "Do you want to deploy new stack or check metrics?";
         String speechOutput = "<speak>"
                 + "Welcome to Ops Assistant. "
                 + whatActionPrompt
                 + "</speak>";
         String repromptText =
                 "I can lead you through launch a stack for different modules "
-                        + "and let you check server or database status, "
-                        + "or you can simply open Ops Assistant and ask a question like, "
+                        + "and you can simply open Ops Assistant and ask a question like, "
                         + "deploy api module on qa with version 3.0.90.0 "
                         + "For a list of supported modules, ask what modules are supported. "
                         + whatActionPrompt;
@@ -778,16 +781,26 @@ public class OpsAssistantSpeechlet implements Speechlet {
         return newAskResponse(speechOutput, repromptText);
     }
 
-    public String handleDeployStackRequest(Map<String, String> stackValueMap) throws Exception{
+    public String handleDeployStackRequest(Map<String, String> stackValueMap, Session session) throws Exception{
 
         DeployStackRequest deployStackRequest = new DeployStackRequest();
-        deployStackRequest.setStackType("api");//stackValueMap.get(//SLOT_MODULE.toLowerCase()));
-        deployStackRequest.setStackEnv("qa");//stackValueMap.get(//SLOT_ENVIRONMENT.toLowerCase()));
-        deployStackRequest.setStackVersion("3.0.89.0-SNAPSHOT");//stackValueMap.get(SLOT_VERSION+"-SNAPSHOT"));
+//        deployStackRequest.setStackType("api");//stackValueMap.get(//SLOT_MODULE.toLowerCase()));
+//        deployStackRequest.setStackEnv("qa");//stackValueMap.get(//SLOT_ENVIRONMENT.toLowerCase()));
+//        deployStackRequest.setStackVersion("3.0.89.0-SNAPSHOT");//stackValueMap.get(SLOT_VERSION+"-SNAPSHOT"));
+//        deployStackRequest.setStackCapacity("Single");
+//        deployStackRequest.setZone("us-west-2a");
+
+        String slotValue = session.getAttribute(SESSION_MODULE).toString();
+        String envValue = session.getAttribute(SESSION_ENVIRONMENT).toString();
+        String versionValue = session.getAttribute(SESSION_VERSION).toString();
+
+        deployStackRequest.setStackType(slotValue);
+        deployStackRequest.setStackEnv(envValue);
+        deployStackRequest.setStackVersion("3.0.90.0-SNAPSHOT");
         deployStackRequest.setStackCapacity("Single");
         deployStackRequest.setZone("us-west-2a");
 
-        if (SLOT_ENVIRONMENT.equalsIgnoreCase("qa")) {
+        if (envValue.equalsIgnoreCase("qa")) {
             deployStackRequest.setInstanceTag("develop");
         } else {
             deployStackRequest.setInstanceTag("release");

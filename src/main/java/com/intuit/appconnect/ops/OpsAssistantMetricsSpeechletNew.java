@@ -28,7 +28,7 @@ import java.util.Set;
  * Created by sjaiswal on 9/28/17.
  */
 public class OpsAssistantMetricsSpeechletNew implements Speechlet {
-    private static final Logger log = LoggerFactory.getLogger(OpsAssistantSpeechlet.class);
+    private static final Logger log = LoggerFactory.getLogger(OpsAssistantMetricsSpeechletNew.class);
 
 
     private static final String SLOT_MODULE = "Module";
@@ -46,6 +46,17 @@ public class OpsAssistantMetricsSpeechletNew implements Speechlet {
     private static final String SESSION_COUNT = "count";
     private static final String SESSION_METRICS = "metrics";
     private static final String SESSION_SERVER_TYPE = "servertype";
+
+
+
+    static String ec2Namespace = "AWS/EC2";
+    static String ec2NamespaceName = "InstanceId";
+    static String ec2NamespaceValue ="i-03b9cb8f759d42cd5";
+    static String rdsNamespace = "AWS/RDS";
+    static String rdsNamespaceName = "DBInstanceIdentifier";
+    static String rdsNamespaceValue ="itduzzit-qa";
+    static String metricName = "CPUUtilization";
+
 
     private static final String HOST_URL = "https://stage.api.appconnect.intuit.com/api/v1/admin/stacks/";
 
@@ -337,18 +348,28 @@ public class OpsAssistantMetricsSpeechletNew implements Speechlet {
         String speechOutput = "";
         Set<Map.Entry<String,String>> slotValueEntrySet = slotValueMap.entrySet();
         Iterator<Map.Entry<String,String>> iterator = slotValueEntrySet.iterator();
+
+        log.info(" inside getMetricsReponse(), Server Type : {}",slotValueMap.get(SLOT_SERVER_TYPE));
+        String metricResponse = "";
+        if (! slotValueMap.get(SLOT_SERVER_TYPE).equalsIgnoreCase("database")) {
+            log.info(" inside no database");
+            metricResponse = MetricsHelper.getStats(ec2Namespace, ec2NamespaceName, ec2NamespaceValue);
+        } else {
+            metricResponse = MetricsHelper.getStats(rdsNamespace, rdsNamespaceName, rdsNamespaceValue);
+        }
+
         speechOutput = new StringBuilder("Metrics ")
                 .append(slotValueMap.get(SLOT_METRICS))
                 .append(" for ")
                 .append(slotValueMap.get(SLOT_SERVER_TYPE))
                 .append(" on ")
                 .append(slotValueMap.get(SLOT_ENVIRONMENT))
-                .append(" will be available soon. ")
+                .append(" is: ")
+                .append(metricResponse)
                 .toString();
-
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
-        card.setTitle("Ops Assistant");
+        card.setTitle("Ops Metrics");
         card.setContent(speechOutput);
 
         // Create the plain text output
@@ -400,7 +421,7 @@ public class OpsAssistantMetricsSpeechletNew implements Speechlet {
      * @return SpeechletResponse spoken and visual response for the given intent
      */
     private SpeechletResponse getWelcomeResponse() {
-        String whatActionPrompt = "Do you want to deploy new stack or check status?";
+        String whatActionPrompt = "Do you want to deploy new stack or check metrics?";
         String speechOutput = "<speak>"
                 + "Welcome to Ops Metrics. "
                 + whatActionPrompt
